@@ -3,9 +3,7 @@
 var MapPrintButton  = HrefFromURLPlus("#","button short icon space-bottom1 print rgm-map-print-button","Imprimir","","") + " ";
 var MapHelpButton   = HrefFromURLPlus("#","button short icon space-bottom1 help","Ajuda","","") + " ";
 var MapAddLButton   = HrefFromURLPlus("#","button short icon space-bottom1 plus fill-green rgm-map-addl-button","Adicionar mapas","","") + " ";
-var MapShareButton  = HrefFromURLPlus("#","button short icon share fill-green rgm-map-share-button","Compartilhe","","") +" "; 
-var MapRecentButton = HrefFromURLPlus("http://projetorgm.com.br/map/?pg=1","button short icon star fill-green rgm-map-recent-button","Mapas recentes","","") +" "; 
-var MapHomeButton   = HrefFromURLPlus("http://projetorgm.com.br/map/","button short icon home space-bottom1 fill-green","Início","","") +" "; 
+var MapHomeButton   = HrefFromURLPlus("http://conheceropenstreetmap.wordpress.com/","button short icon home space-bottom1 fill-green","Início","","") +" "; 
 var LinksAlvo = "";
 var MapControlsInner = "";     //HTML que vai dentro do LegendControl ControlesDoMapa
 var MapaEmbutido = MapIsEmb();
@@ -13,13 +11,11 @@ var MapaEmbutido = MapIsEmb();
 //Os links dos botões devem abrir fora do iframe ou quadro onde o mapa foi embutido
 if ( MapaEmbutido ) {
   LinksAlvo = '_parent';
-  MapShareButton = "";
   MapAddLButton  = "";
-  MapRecentButton = "";       
 }
 
 var MapBaseLayersSelect = "<form id='rgm-map-controles' method='post' >"
-		+"<span class='dark'>"+MapAddLButton+"</span>"
+		+"<p><span class='dark'>"+MapAddLButton+"</span>"
 		+"<span class='icon layers'></span>"
 		+"<select id='map-select-layer' name='share-b'>"
 			+"<option value='lMNK' >OpenStreetMap</option>"  
@@ -45,8 +41,8 @@ var MapBaseLayersSelect = "<form id='rgm-map-controles' method='post' >"
 			+"<option value='lIBU' >IBGE Urbano</option>"
 		+"</select> "
 		+"<span class='dark'>"
-		+ MapShareButton + MapRecentButton + MapHomeButton
-		+"</span> "				
+		+  MapHomeButton
+		+"</span> </p>"				
 		+"<span class='dark map-controls-group space-bottom1'></span>"		
 		+"<input id='share-id' name='share-id' type='hidden' value='0'>"
 		//+"<input id='share-b'  name='share-b' type='hidden' value=''>"
@@ -113,13 +109,13 @@ function AtualizarControlesDoMapa() {
 	PreLinkOSMd      = GetLinkOSMd(Lat,Lon);
 	PreLinkLast90    = GetLinkLast90Edits(Lat,Lon);
 	
-	LinkOSMR      = HrefFromURLPlus(PreLinkOSMR,     "button short icon l-r-arrow","Como chegar até aqui","",LinksAlvo);
-	LinkMapillary = HrefFromURLPlus(PreLinkMapillary,"button short icon street","Fotos e streetview","",LinksAlvo);
-	LinkF4Map     = HrefFromURLPlus(PreLinkF4Map,    "button short icon mt","Veja em 3D","",LinksAlvo);
+	LinkOSMR      = HrefFromURLPlus(PreLinkOSMR,     "button short icon car","Como chegar até aqui","",LinksAlvo);
+	LinkMapillary = HrefFromURLPlus(PreLinkMapillary,"button short icon video","Fotos e streetview","",LinksAlvo);
+	LinkF4Map     = HrefFromURLPlus(PreLinkF4Map,    "button short ","Veja em 3D","3D",LinksAlvo);
 	LinkEcoMap    = HrefFromURLPlus(PreLinkEcoMap,   "button short icon landuse","Mapa ecológico","",LinksAlvo);
 	LinkOSMe      = HrefFromURLPlus(PreLinkOSMe,     "button short icon pencil","Edite este mapa","",LinksAlvo);
-	LinkLast90    = HrefFromURLPlus(PreLinkLast90,   "button short icon history","Edições nos últimos 90 dias","",LinksAlvo);
-	LinkOSMd      = HrefFromURLPlus(PreLinkOSMd,     "button short icon inspect","Dados do mapa","",LinksAlvo);
+	LinkLast90    = HrefFromURLPlus(PreLinkLast90,   "button short icon inspect","Edições nos últimos 90 dias","",LinksAlvo);
+	LinkOSMd      = HrefFromURLPlus(PreLinkOSMd,     "button short icon point-line-poly","Dados do mapa","",LinksAlvo);
 
 	PreLinkNote      = GetLinkNote(Lat,Lon); 
 	LinkNote   = HrefFromURLPlus(PreLinkNote,"button short icon tooltip","Localizou um erro ou algo faltando? Informe pra gente :)","",LinksAlvo);
@@ -304,58 +300,6 @@ $("#map-select-layer").change(function() {
 	ChangeLayer(Opcao);			
 });
 
-$(".rgm-map-share-button").click(function(e) {
-	//share-id: se mapa existente, é informado na abertura do mapa
-	//          se novo mapa, será gerado ao submeter form
-	//Baselayer Overlay: Está dentro do form
-	
-	e.preventDefault();
-	var Tit = "";
-	var Dsc = "";		
-	var Submeter = true;
-
-	var TestID = $("#share-id").val();
-	
-	//Se já tiver mapa cadastrado, nada a fazer. ID = string. Mas se for zero...
-	if ( TestID == '0' ) {
-		Tit = prompt("Salvar este mapa ou apenas link?\nDê um nome para salvar.\nCancelar / sem nome para apenas link.", "sem nome");
-
-		var Cnt = map.getCenter();
-		var Zoom = map.getZoom();
-		var Lat = Cnt.lat;
-		var Lon = Cnt.lng;
-		var XYZ = Zoom + "/" + Lat + "/" + Lon;
-		var O  = ""; 
-	
-		//O salvamento temporário das overlays predefinidas é incondicional
-		$("#share-xyz").val(XYZ);
-		if (map.hasLayer( olMPLL )) {O = "MPLL";}	
-		if (map.hasLayer( olNASC )) {
-			if( O != "" && O != null  ) {	O = O + ";";} //Adiciona um separador
-			O = O + "NASC";
-		}	
-		$("#share-o").val(O);	
-		
-		//Mas o salvamento das overlays customizadas (Mapbox) é condicional ao nome do mapa
-		//Se não tiver título, considera que apenas quer o link do mapa	
-		if (Tit != null && Tit != "" && Tit != "sem nome") { 
-				Dsc = prompt("Quer deixar alguma descrição sobre esse mapa?", "");		
-				$("#share-tit").val(Tit);		
-				if (Dsc != null) { $("#share-dsc").val(Dsc);	}
-				var Total = RawOverlaysMB.length;
-				var MBLayers = "";
-				for ( Cont = 0; Cont < Total; Cont++ ) {
-					MBLayers = MBLayers + RawOverlaysMB[Cont] + ";"; //
-				}
-				$("#share-mb").val(MBLayers );
-		}else {		
-			//Submeter = false;
-			//			
-		}		
-	}	
-	
-	if ( Submeter ) { $("#rgm-map-controles").submit();}			
-});
 
 
 //Função para adicionar mapas criados com o editor Mapbox! :)
