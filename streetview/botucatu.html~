@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Streetview de Capela do Alto, Guapiara - SP</title>
+        <title>Streetview de Botucatu - SP</title>
         <link rel="stylesheet" href="https://npmcdn.com/mapillary-js@1.0.1/dist/mapillary-js.min.css">
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
 
@@ -69,8 +69,8 @@
 
              var marker
 
-         var latLon = [-24.2121, -48.4559]
-         map.setView(latLon, 16)
+         var latLon = [-22.8904, -48.4395]
+         map.setView(latLon, 15)
              marker = L.marker({
                  lat: latLon[0],
                  lon: latLon[1]
@@ -80,11 +80,11 @@
              var mly = new Mapillary
          .Viewer('mly',
                  'aUJQWHVRZ1J2UkUwRUhoZ2J6SURHUTo3OTY1ZmEyZWY3N2EyYjZl',  // Replace this with your own ClientID
-                 'a1nepEEpMfmjo_u6eRjQcA')
+                 'eXtWjXUU4_94EeVDtBr2tQ')
 
              mly.on('nodechanged', function (node) {
                  var latLon = [node.latLon.lat, node.latLon.lon]
-                 map.setView(latLon, 15)
+                 map.setView(latLon, 14)
 
                      if (!marker) {
                          marker = L.marker(node.latLon).addTo(map)
@@ -94,8 +94,8 @@
              })
         </script>
         <div class="pad2">
-            <h1 class="inline col5">Streetview de Capela do Alto, Guapiara - SP</h1>
-            <a href="/conhecerosm/streetview" class="inline button icon prev col2" >Voltar</a>
+            <h1 class="inline col5">Streetview de Botucatu - SP</h1>
+            <a href="/streetview" class="inline button icon prev col2" >Voltar</a>
         </div>
         <div class="clearfix small col12 text-right">
         <span class="pad1">
