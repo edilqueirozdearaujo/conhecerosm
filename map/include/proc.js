@@ -1,8 +1,6 @@
 //initialization ************************************************************
-//var LinkPrint  = HrefFromURLPlus("#","icon printer","Imprimir","","");
-var MapPrintButton  = HrefFromURLPlus("#","button short icon space-bottom1 print rgm-map-print-button","Imprimir","","") + " ";
-var MapHelpButton   = HrefFromURLPlus("#","button short icon space-bottom1 help","Ajuda","","") + " ";
-var MapAddLButton   = HrefFromURLPlus("#","button short icon space-bottom1 plus fill-green rgm-map-addl-button","Adicionar mapas","","") + " ";
+var MapHelpButton   = HrefFromURLPlus("http://edilqueirozdearaujo.github.io/conhecerosm/map/about.html","button short icon space-bottom1 help","Ajuda","","") + " ";
+var MapAddLButton   = HrefFromURLPlus("#","button short icon space-bottom1 plus fill-green map-addl-button","Adicionar mapas","","") + " ";
 var MapHomeButton   = HrefFromURLPlus("http://conheceropenstreetmap.wordpress.com/","button short icon home space-bottom1 fill-green","Início","","") +" "; 
 var LinksAlvo = "";
 var MapControlsInner = "";     //HTML que vai dentro do LegendControl ControlesDoMapa
@@ -14,7 +12,7 @@ if ( MapaEmbutido ) {
   MapAddLButton  = "";
 }
 
-var MapBaseLayersSelect = "<form id='rgm-map-controles' method='post' >"
+var MapBaseLayersSelect = "<form id='map-controles' method='post' >"
 		+"<p><span class='dark'>"+MapAddLButton+"</span>"
 		+"<span class='icon layers'></span>"
 		+"<select id='map-select-layer' name='share-b'>"
@@ -41,7 +39,8 @@ var MapBaseLayersSelect = "<form id='rgm-map-controles' method='post' >"
 			+"<option value='lIBU' >IBGE Urbano</option>"
 		+"</select> "
 		+"<span class='dark'>"
-		+  MapHomeButton
+		+  MapHomeButton 
+		+  MapHelpButton
 		+"</span> </p>"				
 		+"<span class='dark map-controls-group space-bottom1'></span>"		
 		+"<input id='share-id' name='share-id' type='hidden' value='0'>"
@@ -304,7 +303,7 @@ $("#map-select-layer").change(function() {
 
 
 //Função para adicionar mapas criados com o editor Mapbox! :)
-$(".rgm-map-addl-button").click(function(e) {
+$(".map-addl-button").click(function(e) {
 	e.preventDefault();
 	var Link  = "\nEditor Mapbox: http://mapbox.com/editor/";
 	var Mapa = prompt("Adicione seus mapas criados com o " + Link + '\nInforme o ID e apelido separados por vírgula', "projetorgm.n11d3kl9,Unidades");
@@ -316,13 +315,6 @@ $(".rgm-map-addl-button").click(function(e) {
 			alert('Mapa inválido! Informe um ID e Apelido, separados por vírgulas');			
 		}
 	}		
-});
-
-
-$(".rgm-map-recent-button").click(function(e) {
-	//e.preventDefault();
-	//$("#map-recent").val('1');	
-	//$("#rgm-map-controles").submit();
 });
 
 
