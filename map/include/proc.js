@@ -100,6 +100,7 @@ function AtualizarControlesDoMapa() {
 	var Cnt = map.getCenter();
 	var Lat = Cnt.lat;
 	var Lon = Cnt.lng;
+	var Zoom = map.getZoom();
 	
 	PreLinkOSMR      = GetLinkOSMR(Lat,Lon); 
 	PreLinkMapillary = GetLinkMapillary(Lat,Lon);
@@ -107,14 +108,14 @@ function AtualizarControlesDoMapa() {
 	PreLinkEcoMap    = GetLinkEcoMap(Lat,Lon);
 	PreLinkOSMe      = GetLinkOSMe(Lat,Lon);
 	PreLinkOSMd      = GetLinkOSMd(Lat,Lon);
-	PreLinkLast90    = GetLinkLast90Edits(Lat,Lon);
+	PreLinkHistory   = GetLinkHistory(Lat,Lon,Zoom);
 	
 	LinkOSMR      = HrefFromURLPlus(PreLinkOSMR,     "button short icon car","Como chegar até aqui","",LinksAlvo);
 	LinkMapillary = HrefFromURLPlus(PreLinkMapillary,"button short icon video","Fotos e streetview","",LinksAlvo);
 	LinkF4Map     = HrefFromURLPlus(PreLinkF4Map,    "button short ","Veja em 3D","3D",LinksAlvo);
 	LinkEcoMap    = HrefFromURLPlus(PreLinkEcoMap,   "button short icon landuse","Mapa ecológico","",LinksAlvo);
 	LinkOSMe      = HrefFromURLPlus(PreLinkOSMe,     "button short icon pencil","Edite este mapa","",LinksAlvo);
-	LinkLast90    = HrefFromURLPlus(PreLinkLast90,   "button short icon inspect","Edições nos últimos 90 dias","",LinksAlvo);
+	LinkHistory   = HrefFromURLPlus(PreLinkHistory, "button short icon time","Ao longo de 10 anos","",LinksAlvo);
 	LinkOSMd      = HrefFromURLPlus(PreLinkOSMd,     "button short icon point-line-poly","Dados do mapa","",LinksAlvo);
 
 	PreLinkNote      = GetLinkNote(Lat,Lon); 
@@ -122,7 +123,7 @@ function AtualizarControlesDoMapa() {
 
 	
 	LinksLegenda = LinkOSMR + " " + LinkMapillary + " " + LinkF4Map + " " + LinkEcoMap + " " + LinkOSMe
-					 + " " + LinkLast90 + " " + LinkOSMd + " "  + LinkNote; // + " " + LinkPrint;
+					 + " " + LinkHistory + " " + LinkOSMd + " "  + LinkNote; // + " " + LinkPrint;
 	
 	if ( !MapaEmbutido ) {
 		LinksLegenda = LinksLegenda; 

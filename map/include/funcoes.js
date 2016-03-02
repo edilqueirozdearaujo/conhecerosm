@@ -80,12 +80,19 @@ function GetLinkOSMd(Lat,Lon) {
 	return Link;
 }
 
+
+
 //Recent edits: last 90 days - ito! map
 function GetLinkLast90Edits(Lat,Lon) {
 	var Link = "http://www.itoworld.com/map/129?lon="+ Lon + "&lat="+ Lat + "&zoom=14";
 	return Link;
 }
 
+//Mapbox 10 years of OpenStreetMap
+function GetLinkHistory(Lat,Lon,Zoom) {
+	var Link = "https://www.mapbox.com/ten-years-openstreetmap/#"+ Lon + "/"+ Lat + "/" + Zoom;
+	return Link;
+}
 
 function GetLinkEcoMap(Lat,Lon) {
 	var Link = "http://mapaecologico.com.br/?coord=" + Lat + "|" + Lon + "|11";
