@@ -189,10 +189,16 @@ function MapillaryImg(Key,Width) {
 	return 'https://d1cuyjsrcm0gby.cloudfront.net/' + Key + '/thumb-'+ Width + '.jpg';
 }
 
+
 function MapillaryImgHref(Key) {
-	var Img = '<img alt="foto..." src="' + MapillaryImg(Key,320)  + '" />';
-	var Link = "http://mapillary.com/map/im/"+ Key +"/photo";
+	var Cnt = map.getCenter();
+	var Lat = Cnt.lat;
+	var Lon = Cnt.lng;
+	var Zoom = map.getZoom();
 	
+	var Img = '<img width="99%" alt="foto..." src="' + MapillaryImg(Key,320)  + '" />';
+//	var Link = "http://mapillary.com/map/im/"+ Key +"/photo";
+	var Link = GetLinkMapillaryView(Key,Lat,Lon,Zoom);
 	
 	return HrefFromURLPlus(Link,'','',Img,'_parent'); 
 }

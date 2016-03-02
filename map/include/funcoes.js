@@ -106,6 +106,12 @@ function GetLinkNote(Lat,Lon) {
 }
 
 
+function GetLinkMapillaryView(Key,Lat,Lon,Zoom) {
+	var Link = "http://edilqueirozdearaujo.github.io/conhecerosm/mapillary/?key=" + Key + "&lat=" + Lat + "&lon=" + Lon + "&zoom=" + Zoom;
+	return Link;
+}
+
+
 //Check if the map is inside of an IFRAME
 //Fonte: http://pt.stackoverflow.com/questions/49538/como-pegar-a-url-da-p%C3%A1gina-pai-de-um-iframe-sem-estar-no-mesmo-dom%C3%ADnio
 function MapIsEmb() {
