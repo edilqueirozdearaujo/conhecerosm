@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Cristo Redentor, Ribeirão Grande | Streetview Comparativo Mapillary</title>
+  <script src="https://npmcdn.com/mapillary-js@1.1.0/dist/mapillary-js.min.js"></script>
+  <link rel="stylesheet" href="https://npmcdn.com/mapillary-js@1.1.0/dist/mapillary-js.min.css"/>
+
+  <link rel="shortcut icon" href="../imagens/favicon.ico" />
+  <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+  
+  <style>
+  
+  .mly-wrapper { margin: 0 auto; }
+  
+  .mly-wrapper {
+    position: relative;
+    background-color: grey;
+    width: 640px;
+    height: 480px;
+  }
+  #mly, .mapillary-js {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+</head>
+<body class="fill-navy dark prose">
+<div class="mly-wrapper"><div class="mly" id="viewer"></div></div>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+    var viewer = new Mapillary.Viewer(
+            "viewer",
+           'aUJQWHVRZ1J2UkUwRUhoZ2J6SURHUTo3OTY1ZmEyZWY3N2EyYjZl',  // Replace this with your own ClientID
+           'Blyjcf0KropoNn6PSz1FYw', 										  // Photo background
+            {
+                "cover": false,
+                "imageplane": false,
+                "direction": false,
+                "sequence": false,
+                "mouse": false,
+                "keyboard": false,
+                "slider": {
+                    keys: {
+                        background: "Blyjcf0KropoNn6PSz1FYw",
+                        foreground: "TKe3-kThBvMx-G2EcGh82g", // Same as initial key above
+                    },
+                    initialPosition: 1.0,
+                }
+            });
+})
+</script>
+
+        <div class="pad2">
+            <h2 class="inline col6 text-right space">Dia x Entardecer: Cristo Redentor, Ribeirão Grande</h2>
+            <h3 class="inline col6 fancy"> | Streetview Mapillary</h3>
+            <a href="/conhecerosm/streetview" class="button icon prev col2" >Voltar</a>
+        </div>
+        <p class="pad1 center">
+	        feito com <span class="icon heart"></span> usando <a href="http://mapillary.github.io/mapillary-js/" >mapillary-js</a>
+        </p>
+
+
+</body>
+</html>
