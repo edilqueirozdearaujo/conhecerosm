@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Slide Maker | Mapillary Streetview</title>
+  <script src="https://npmcdn.com/mapillary-js@1.1.0/dist/mapillary-js.min.js"></script>
+  <link rel="stylesheet" href="https://npmcdn.com/mapillary-js@1.1.0/dist/mapillary-js.min.css"/>
+
+  <link rel="shortcut icon" href="../imagens/favicon.ico" />
+  <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+  
+</head>
+<body class="fill-navy dark prose">
+	<script src="../js/jquery.min.js" ></script>
+	<script src="../js/urlparams.js" ></script>
+	<script src="../js/funcoes.js" ></script>
+	<script src="../js/base64.js" ></script>
+	
+	<h3 class="fancy center col8">Faça seu slide Mapillary!</h3>
+	<p class="prose prose-big text-right col3"><a href="https://conheceropenstreetmap.wordpress.com/2016/05/02/mapillaryjs/"><span class="icon dark star"></span><span class="dark">Saiba mais</span></a></p>
+	
+	<div class="clearfix">
+   <form class="pad2">
+     <fieldset class="col12">
+       <label>Imagem de fundo (backgound)</label>
+       <input id="inpBk" value="jRe1oXoBSVJ6eJvrr2kbqg" class="stretch" type="text">
+     </fieldset>
+     <fieldset>
+	       <label>Imagem de frente (foreground)</label>
+	       <input id="inpFg" value="UbBiVj8ftV482qynlLLwWA" class="stretch" type="text">
+     </fieldset>	       
+	  <fieldset>
+	       <label>Título / comentário curto</label>
+	       <input id="inpCm" value="" class="stretch" type="text">
+     </fieldset>
+     <fieldset>
+       	<a id="btnMake" href="#" class="button icon sprocket col2 fill-green" >Gerar!</a>
+     </fieldset>
+	  <fieldset class="center">
+	       <label><span class="icon dark link"></span> Link</label>
+	       <span id="SlideLink" class="prose prose-big">http://</span>
+     </fieldset>
+   </form>	
+	</div>
+    <div class="pad2">
+	            <h3 class="inline col6 fancy"> | Streetview Mapillary</h3>
+	            <a href="/conhecerosm/streetview" class="button icon prev col2" >Voltar</a>
+	        </div>
+	        <p class="pad1 center">
+		        feito com <span class="icon heart"></span> usando <a href="http://mapillary.github.io/mapillary-js/" >mapillary-js</a>
+	        </p>
+
+	<script>
+		//Função para adicionar mapas criados com o editor Mapbox! :)
+		$("#btnMake").click(function(e) {
+			e.preventDefault();
+			
+			 var URLBase = '/mapillary-slider/';
+	       var MapillaryB = '';
+	       var MapillaryF = '';
+	       var Comment = '';
+	       var Link = ''
+	       var LinkCompleto = ''
+
+
+			var TestB = $('#inpBk').val();
+			var TestF = $('#inpFg').val();
+			var TestC = $('#inpCm').val();
+
+			if (TestB!=null && TestB != ""){ 
+				MapillaryB = TestB;
+				if (TestF!=null && TestF != ""){
+					MapillaryF = TestF;
+					if (TestC!=null && TestC != ""){ Comment = encodeBase64(TestC.substr(0, 127)); }
+					
+					Link = URLBase + '?b=' + MapillaryB + '&f=' + MapillaryF + '&c=' + Comment;
+					LinkCompleto = HrefFromURLPlus(Link,'dark','',Link.substr(0, 127),'');
+					$("#SlideLink").html(LinkCompleto);
+					
+									
+				}else {alert('Falta imagem de frente');}
+			}else {alert('Falta imagem de fundo');}
+			
+						
+			
+			
+
+			
+		});
+	
+	
+	</script>	
+	
+	
+</body>
+</html>
