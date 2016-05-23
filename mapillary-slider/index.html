@@ -31,7 +31,7 @@
 	<script src="../js/jquery.min.js" ></script>
 	<script src="../js/urlparams.js" ></script>
 	<script src="../js/funcoes.js" ></script>
-	<script src="../js/base64.js" ></script>
+	<script src="../js/base64.js" ></script>	
 	
 	<div class="mly-wrapper"><div class="mly" id="viewer"></div></div>
 	<script>
@@ -81,13 +81,10 @@
 	        <div class="pad2">
 	            <h2 id="ImgDesc" class="inline col6 text-right space">xxxxxxxxxxxx</h2>
 	            <h3 class="inline col6 fancy"> | Streetview Mapillary</h3>
-	            <div>
-	            <a id="btnBg" href="#" class="col2 button  fill-green inline" ><img class="inline" src="../imagens/mapillary-logo-white.svg"> Mapillary Foto 1</a></div>
-	            <a id="btnFg" href="#" class="col2 button margin0 fill-green inline" ><img class="inline" src="../imagens/mapillary-logo-white.svg"> Mapillary Foto 2</a></div>
-	            
-	            <a href="/conhecerosm/streetview" class="col2 button icon prev margin0 inline" >Voltar</a></div>
-	            <a href="make.html" class="col2 button icon turn-right  fill-mustard margin0 inline" >Faça o seu slide!</a>
-	            </div>	            
+	            <a id="btnBg" href="#" class="col2 button  fill-green inline" ><img class="inline" src="../imagens/mapillary-logo-white.svg"> <span class="txtBtnMP1">Mapillary Foto 1</span></a>
+	            <a id="btnFg" href="#" class="col2 button margin0 fill-green inline" ><img class="inline" src="../imagens/mapillary-logo-white.svg"> <span class="txtBtnMP2">Mapillary Foto 2</span></a>	          
+	            <a href="/conhecerosm/streetview" class="col2 button icon prev margin0 inline" ><span class="txtBtnBack">Voltar</span></a>
+	            <a href="make.html" class="col2 button icon turn-right  fill-mustard margin0 inline" ><span class="txtBtnMake">Faça o seu slide!</span></a>	            
 	        </div>
             <script>
 					$("#btnBg").click(function(e) { e.preventDefault();});
@@ -102,11 +99,12 @@
             	var URLFg = GetLinkMapillaryImg(MapillaryF); 
             	
             	$("#btnBg").prop("href", URLBg);
-            	$("#btnFg").prop("href", URLFg);            	            	 
-            </script>            
+            	$("#btnFg").prop("href", URLFg);            	
+            </script>          
+            
 	        <p class="pad1 center">
-		        feito com <span class="icon heart"></span> usando <a href="http://mapillary.github.io/mapillary-js/" >mapillary-js</a>
+		        <span class="txtFeitoComMJS">feito com usando</span> <a href="http://mapillary.github.io/mapillary-js/" >mapillary-js</a>
 	        </p>
-	
+           <script src="language.js" ></script>  	
 </body>
 </html>
