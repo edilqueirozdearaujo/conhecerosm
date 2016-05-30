@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Streetview | Conhecer OpenStreetMap</title>
+		  <link rel="shortcut icon" href="../imagens/favicon.ico" />
+		  <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+    </head>
+    <body class="fill-navy dark prose">
+        <script src="../js/jquery.min.js" ></script>
+        <script src="../js/funcoes.js" ></script>
+		  <script>
+		       var MapillaryPhoto1 = '6onOh9G45SBKiucFwsTDxQ';
+		       var MapillaryPhoto2 = 'l003u-x6XSJVSNW_ttAECA';
+		       var Comment = 'Segundo colaboradores, a foto é de 1980. O ônibus que aparece na foto era da Columbia, firma que prestava serviço na Itabira (fábrica de cimento). Agradecimentos pela contribuição de Pedro D. de Queiroz.';
+		       var PgTitle = 'Entrada de Ribeirão Grande na década de 1980';
+		  </script>
+
+			
+		
+	        <div class="col12 center pad0">
+	            <h3 class="fancy ImgHeader">Ao Longo do Tempo com Mapillary Streetview</h3>
+
+				  <div class="col8">
+				  		<div>						
+						<iframe frameborder="0" class="juxtapose" width="100%" height="615" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=74e16856-267d-11e6-a524-0e7075bba956"></iframe>
+						</div>		  
+				  </div>	
+
+				  <div class="col5">
+		            <p id="ImgDesc" class="col12 prose prose-big keyline-all pad0">xxxxxxxxxxxx</p>
+		            <a id="btnP1" href="#" class="button  fill-green inline" ><img class="inline" src="../imagens/mapillary-logo-white.svg"> <span class="txtBtnMP1">Mapillary Foto 1</span></a>
+		            <a id="btnP2" href="#" class="button margin0 fill-green inline" ><img class="inline" src="../imagens/mapillary-logo-white.svg"> <span class="txtBtnMP2">Mapillary Foto 2</span></a>
+		            <p></p>
+		            <a href="/conhecerosm/streetview" class="button icon prev margin0 inline" ><span class="txtBtnBack">Voltar</span></a>
+		            <a href="make.html" class="button icon turn-right  fill-mustard margin0 inline" ><span class="txtBtnMake">Saiba mais!</span></a>	            
+				  </div>
+	        </div>
+            <script>
+					$("#btnP1").click(function(e) { e.preventDefault();});
+					$("#btnP2").click(function(e) { e.preventDefault();});
+            
+            	document.getElementById("ImgDesc").textContent = Comment;
+            	if (PgTitle!=null){
+            		document.title = PgTitle + " | Mapillary Streetview";
+            	}
+            	
+            	var URLBg = GetLinkMapillaryImg(MapillaryPhoto1); 
+            	var URLFg = GetLinkMapillaryImg(MapillaryPhoto2); 
+            	
+            	$("#btnP1").prop("href", URLBg);
+            	$("#btnP2").prop("href", URLFg);            	
+            </script>          
+	        
+	         <script src="slides-language.js" ></script>
+
+    </body>
+</html>
