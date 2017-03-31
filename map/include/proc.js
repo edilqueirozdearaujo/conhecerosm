@@ -240,10 +240,10 @@ var olMPLL = L.mapbox.featureLayer()
 
  
 
-//API_ENDPOINT = GetAPI_ENDPOINT();
 olMPLL.loadURL(GetAPI_ENDPOINT());
-olMPLL.addTo(map);
-AttrIfLayerIsOn( olMPLL, attrMapillary );
+//Autocarregamento da camada Mapillary desativado
+//olMPLL.addTo(map);
+//AttrIfLayerIsOn( olMPLL, attrMapillary );
 
 
 ControlLayers.addOverlay(olMPLL, 'Fotos do Mapillary');								
