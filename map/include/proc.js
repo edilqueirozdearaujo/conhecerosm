@@ -5,6 +5,7 @@ var MapHomeButton   = HrefFromURLPlus("http://conheceropenstreetmap.wordpress.co
 var LinksAlvo = "";
 var MapControlsInner = "";     //HTML que vai dentro do LegendControl ControlesDoMapa
 var MapaEmbutido = MapIsEmb();
+var MapPreventNewUserMakers = false;  //Ao clicar, cria um marcador.
 
 //Os links dos botões devem abrir fora do iframe ou quadro onde o mapa foi embutido
 if ( MapaEmbutido ) {
@@ -203,7 +204,7 @@ function MapillaryImgHref(Key) {
 	return HrefFromURLPlus(Link,'','',Img,'_parent'); 
 }
 
-
+//Função para obter os limites do mapa
 function GetAPI_ENDPOINT() {
 	S = map.getBounds().getSouth();    
 	N = map.getBounds().getNorth();    
@@ -215,12 +216,25 @@ function GetAPI_ENDPOINT() {
 	+ "&max_lat=" + N +"&max_lon="+E+"&min_lat="+S+"&min_lon="+W+"&limit=200&page=0";	
 }
 
+//Configura o ícone Mapillary
 var MapillaryIcon =  L.mapbox.marker.icon({
         'marker-size': 'large',
         'marker-symbol': 'camera',
         'marker-color': '#36af6d'
-    })
+    });
 
+//Configura um ícone ao clicar no mapa
+var UserIconOnClick =  L.mapbox.marker.icon({
+        'marker-size': 'large',
+        //'marker-symbol': 'information',
+        'marker-color': 'e55e5e'
+    });
+
+var UserTempMarker = L.marker([],{
+                         'draggable' :true,
+						 'icon': UserIconOnClick
+						});
+	
 
 var olMPLL = L.mapbox.featureLayer()
     .on('layeradd', function(e) {
@@ -281,6 +295,25 @@ map.on('overlayremove', function(e) {
 	 AttrIfLayerIsOn( olMPLL, attrMapillary );		     
 	 CheckOverpassLayers();		     
  });
+ 
+ 
+ 
+//Mostra coordenadas quando clicar em alguma parte do mapa
+UserTempMarker.on('click', function(e) {
+	UserTempMarker.bindPopup('<p>Coordenadas:<br>'+ e.latlng + '</p>');	
+});
+
+map.on('click', function(e) {
+	if (!MapPreventNewUserMakers){
+		MapPreventNewUserMakers = true;
+		//var Msg = 'COORDENADAS:\n' + e.latlng
+		UserTempMarker.setLatLng(e.latlng);
+		UserTempMarker.addTo(map);
+	}else{
+		MapPreventNewUserMakers = false;
+		map.removeLayer(UserTempMarker);
+	}
+});
    
 
 
@@ -321,12 +354,6 @@ $(".map-addl-button").click(function(e) {
 			alert('Mapa inválido! Informe um ID e Apelido, separados por vírgulas');			
 		}
 	}		
-});
-
-//Mostra coordenadas quando clicar em alguma parte do mapa
-map.on('click', function(e) {
-	var Msg = 'COORDENADAS:\n' + e.latlng
-	alert(Msg); 
 });
 
 //adiciona uma camada no mapa, e armazena informações. Dados = Array, 0 = mapbox ID | 1 = Apelido | 2 = heat ou cluster layer

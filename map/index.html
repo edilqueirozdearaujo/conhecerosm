@@ -10,6 +10,7 @@
 	<!-- Mapbox  -->
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+
 	<link href='//mapbox.com/base/latest/base.css' rel='stylesheet' />
 	<script> 
 		L.mapbox.accessToken   = "pk.eyJ1IjoiZWRpbHF1ZWlyb3pkZWFyYXVqbyIsImEiOiJ0dkRZNmRzIn0.3fPj6O145rJxSSA1yUuIjg";
@@ -42,12 +43,22 @@
 	<script src="include/jquery.min.js" ></script>
 	<script src='include/providers.js'></script>
 	<script src="include/funcoes.js"></script>
+	<script src="include/urlparams.js" ></script>
 
 </head>
 <body class="fill-dark">	
 <div id='geocode-selector'></div> 
 <div id='mapdiv'></div> 
-<script> 
+<script>
+		//Permite que usuario modifique camada de fundo por URL
+		var URLSetBaseLayer = null;
+		
+		//estilo de mapa por parâmetro - validação
+		var TestBaseLayer = $.urlParam('l');
+		if (TestBaseLayer!=null){ URLSetBaseLayer = TestBaseLayer;}         
+
+
+
 		var HeatLayer = L.heatLayer([], { minZoom: 5, maxZoom: 17 }); 
 		var ClusterLayer = new L.MarkerClusterGroup(); 
 		var RawOverlaysMB = []; //Overlays como dados brutos 
@@ -61,8 +72,12 @@
 <script src='include/proc.js'></script> 
 <script> 
   
+		//Foi solicitada mudança por URL?
+		if (URLSetBaseLayer!=null){ 
+		
+		}
   
-	</script> 
+</script> 
 	
 	
 	
