@@ -323,6 +323,11 @@ $(".map-addl-button").click(function(e) {
 	}		
 });
 
+//Mostra coordenadas quando clicar em alguma parte do mapa
+map.on('click', function(e) {
+	var Msg = 'COORDENADAS:\n' + e.latlng
+	alert(Msg); 
+});
 
 //adiciona uma camada no mapa, e armazena informações. Dados = Array, 0 = mapbox ID | 1 = Apelido | 2 = heat ou cluster layer
 //MapNick = Apelido do mapa 
