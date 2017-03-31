@@ -218,7 +218,7 @@ function GetAPI_ENDPOINT() {
 var MapillaryIcon =  L.mapbox.marker.icon({
         'marker-size': 'large',
         'marker-symbol': 'camera',
-        'marker-color': '#1087bf'
+        'marker-color': '#36af6d'
     })
 
 
