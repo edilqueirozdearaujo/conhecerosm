@@ -74,7 +74,14 @@
   
 		//Foi solicitada mudança por URL?
 		if (URLSetBaseLayer!=null){ 
-		
+			switch(URLSetBaseLayer) {
+				case 'satelite' : URLSetBaseLayer = 'lMBT'; break;					
+			}	
+			
+			if(BaselayersValidas.match(URLSetBaseLayer)){
+				$('#map-select-layer').val(URLSetBaseLayer);
+				$('#map-select-layer').change();
+			}
 		}
   
 </script> 

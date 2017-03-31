@@ -58,6 +58,7 @@ var ControlesDoMapa = new L.mapbox.LegendControl({position: 'topright'});
 ControlesDoMapa.addTo(map);
 ControlesDoMapa.addLegend(MapBaseLayersSelect); //A seleção das camadas do mapa não devem ser mudadas ao mover o mapa
 
+var BaselayersValidas = 'lMNK;lMKG;lMBL;lMBD;lOTD;lMBO;lCYL;lLSC;lTPD;lMBB;lMBP;lMBC;lMBR;lSTW;lSTL;lSTT;lMBW;lMBS;lMBT;lIBR;lIBU';
 
 function ChangeLayer(Opcao) {
 	//Transforma Opcao (string) em layer
