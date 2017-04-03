@@ -275,8 +275,8 @@ olMPLL.loadURL(GetAPI_ENDPOINT());
 //AttrIfLayerIsOn( olMPLL, attrMapillary );
 
 
-ControlLayers.addOverlay(olMPLL, 'Fotos do Mapillary');								
-ControlLayers.addOverlay(olNASC, 'Nascentes');								
+ControlLayers.addOverlay(olMPLL, '<span class="icon picture"></span> Fotos do Mapillary');								
+ControlLayers.addOverlay(olNASC, '<span class="icon water"> Nascentes');								
 ControlLayers.addTo(map);
 
 L.control.locate().addTo(map);
