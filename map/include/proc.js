@@ -60,6 +60,20 @@ ControlesDoMapa.addLegend(MapBaseLayersSelect); //A seleção das camadas do map
 
 var BaselayersValidas = 'lMNK;lMKG;lMBL;lMBD;lOTD;lMBO;lCYL;lLSC;lTPD;lMBB;lMBP;lMBC;lMBR;lSTW;lSTL;lSTT;lMBW;lMBS;lMBT;lIBR;lIBU';
 
+
+function LinkDoMapa(Lat,Lon,Zoom,Dir){
+	var Host = "http://"+window.location.hostname;
+	var BaseLayer = BaseLayerAtual();
+	var PreLink = Host + Dir + '#' + Zoom + '/' + Lat + '/' + Lon + '&l=' + BaseLayer;	
+	var Link    = HrefFromURLPlus(PreLink,"","Link","<span class='icon arrowright'>Link</span>",LinksAlvo);	
+	return Link;
+}
+
+function BaseLayerAtual(){
+   var Opcao = $("#map-select-layer option:selected").val();	
+   return Opcao;
+}
+
 function ChangeLayer(Opcao) {
 	//Transforma Opcao (string) em layer
 	switch( Opcao ) {
@@ -301,13 +315,18 @@ map.on('overlayremove', function(e) {
  
 //Mostra coordenadas quando clicar em alguma parte do mapa
 UserTempMarker.on('click', function(e) {
-	UserTempMarker.bindPopup('<p>Coordenadas:<br>'+ e.latlng + '</p>');	
+	//pega coordenadas
+	var Zoom = map.getZoom();
+	var Link = LinkDoMapa(e.latlng.lat,e.latlng.lng,Zoom,'/map/');
+	var Msg = "<label><span class='icon marker'>Coordenadas:</label>"
+            + "<textarea onclick='this.select()'>"+ e.latlng.lat+', '+ e.latlng.lng  +"</textarea>'"
+			+ '<p>' + Link + '</p>';
+	UserTempMarker.bindPopup(Msg);	
 });
 
 map.on('click', function(e) {
 	if (!MapPreventNewUserMakers){
 		MapPreventNewUserMakers = true;
-		//var Msg = 'COORDENADAS:\n' + e.latlng
 		UserTempMarker.setLatLng(e.latlng);
 		UserTempMarker.addTo(map);
 	}else{
@@ -336,8 +355,8 @@ map.on('dragend', function(e) {
 */
 //thanks to http://jsfiddle.net/3fdCD/ from http://stackoverflow.com/questions/22119535/having-trouble-with-leaflet-removelayer
 $("#map-select-layer").change(function() {
-	var Opcao = $("#map-select-layer option:selected").val();
-	ChangeLayer(Opcao);			
+	//var Opcao = $("#map-select-layer option:selected").val();
+	ChangeLayer(BaseLayerAtual());			
 });
 
 
